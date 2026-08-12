@@ -4,39 +4,21 @@
     <meta charset="UTF-8">
     <title>Aditya Music App</title>
     <style>
-        body { background: #000; color: #fff; text-align: center; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; }
-        .banner { background: #ff5722; width: 100%; padding: 10px; position: absolute; top: 0; }
-        .btn { background: #ff5722; border: none; padding: 20px 40px; color: #fff; font-size: 1.5rem; border-radius: 50px; cursor: pointer; }
+        body { background: #121212; color: white; text-align: center; font-family: sans-serif; padding: 20px; }
+        .banner { background: #ff5722; padding: 15px; border-radius: 10px; margin-bottom: 20px; font-weight: bold; }
+        .song-btn { display: block; width: 100%; max-width: 400px; margin: 10px auto; padding: 15px; background: #333; color: white; border: 1px solid #ff5722; border-radius: 10px; text-decoration: none; font-size: 1.1rem; }
     </style>
 </head>
 <body>
     <div class="banner">👨‍💻 ही वेबसाईट आदित्य देशमुख यांनी तयार केली आहे</div>
-    <div id="player"></div>
-    <button class="btn" onclick="startRadio()">▶️ संगीत सुरू करा</button>
-    <p id="status">बटण दाबल्यावर गाणी वाजू लागतील</p>
-
-    <script src="https://www.youtube.com/iframe_api"></script>
-    <script>
-        let player;
-        const songs = ["g0eO74UmRVs", "L0zMGUWEp7I", "V6g-x1E2wF8", "mt9xg0H2YgY", "wXw-4i79Qp0"];
-        let idx = 0;
-
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('player', { height: '0', width: '0', videoId: songs[0] });
-        }
-
-        function startRadio() {
-            document.getElementById('status').innerText = "गाणे वाजत आहे...";
-            player.playVideo();
-        }
-
-        // गाणे संपल्यावर पुढचे गाणे लावण्यासाठी
-        setInterval(() => {
-            if (player && player.getPlayerState() === 0) {
-                idx = (idx + 1) % songs.length;
-                player.loadVideoById(songs[idx]);
-            }
-        }, 3000);
-    </script>
+    <h2>माझी आवडती गाणी (क्लिक करा आणि ऐका)</h2>
+    
+    <!-- तुम्ही इथे कितीही गाणी जोडू शकता -->
+    <a href="https://www.youtube.com/watch?v=g0eO74UmRVs" class="song-btn">१. कल हो ना हो</a>
+    <a href="https://www.youtube.com/watch?v=L0zMGUWEp7I" class="song-btn">२. सूरज हुआ मद्धम</a>
+    <a href="https://www.youtube.com/watch?v=V6g-x1E2wF8" class="song-btn">३. कहो ना प्यार है</a>
+    <a href="https://www.youtube.com/watch?v=mt9xg0H2YgY" class="song-btn">४. तुम से ही</a>
+    <a href="https://www.youtube.com/watch?v=wXw-4i79Qp0" class="song-btn">५. तेरे नाम</a>
 </body>
-</html>
+        </html>
+        
