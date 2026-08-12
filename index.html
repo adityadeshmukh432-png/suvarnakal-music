@@ -3,124 +3,258 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aditya Music App</title>
+    <title>आदित्य डीलक्स सैलून 💈 | 90s & 2000s Radio</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { 
-            background: #121212; 
-            color: white; 
-            text-align: center; 
-            font-family: Arial, sans-serif; 
-            padding: 15px; 
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
-        .container { max-width: 450px; margin: 0 auto; }
-        .banner { 
-            background: #ff5722; 
-            padding: 15px; 
-            border-radius: 10px; 
-            margin-bottom: 20px; 
-            font-weight: bold; 
+        body {
+            background-color: #0d0d0d;
+            color: #f5f5f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 15px;
+        }
+        .saloon-card {
+            background: #181818;
+            border: 3px solid #ff5722;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 420px;
+            padding: 25px 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(255, 87, 34, 0.25);
+            position: relative;
+        }
+        .retro-header {
+            background: linear-gradient(45deg, #ff5722, #ff9800);
+            color: #000;
+            font-weight: 900;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            text-shadow: 0 1px 2px rgba(255,255,255,0.3);
+        }
+        .shop-info {
+            font-size: 0.85rem;
+            color: #aaa;
+            margin-bottom: 20px;
+        }
+        .price-tag {
+            color: #4caf50;
+            font-weight: bold;
         }
         
-        /* ऑडिओ प्लेयर बॉक्स */
-        .player-card {
-            position: sticky;
-            top: 10px;
-            background: #252525;
+        /* प्लेयर डिस्प्ले */
+        .display-screen {
+            background: #000;
+            border: 2px dashed #ff5722;
+            border-radius: 12px;
+            padding: 20px 10px;
+            margin-bottom: 20px;
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .now-playing-label {
+            font-size: 0.75rem;
+            color: #ff9800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+        .song-name {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #fff;
+            padding: 0 10px;
+        }
+        .artist-name {
+            font-size: 0.85rem;
+            color: #888;
+            margin-top: 5px;
+        }
+
+        /* कंट्रोल बटन्स */
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .btn {
+            background: #282828;
+            color: #fff;
+            border: 1px solid #444;
+            padding: 12px 18px;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .btn:hover {
+            background: #ff5722;
+            color: #000;
+            font-weight: bold;
+            border-color: #ff5722;
+        }
+        .enter-btn {
+            background: #ff5722;
+            color: #000;
+            font-size: 1.1rem;
+            font-weight: bold;
+            width: 100%;
             padding: 15px;
             border-radius: 12px;
-            margin-bottom: 20px;
-            border: 2px solid #ff5722;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-            z-index: 10;
-        }
-        #song-title {
-            font-size: 1rem;
-            color: #ff9800;
-            margin-bottom: 10px;
-            font-weight: bold;
-        }
-        audio { width: 100%; height: 40px; }
-
-        /* गाण्यांची यादी */
-        .song-btn { 
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%; 
-            margin: 8px 0; 
-            padding: 12px 15px; 
-            background: #1e1e1e; 
-            color: white; 
-            border: 1px solid #444; 
-            border-radius: 8px; 
-            font-size: 0.95rem; 
+            border: none;
             cursor: pointer;
-            transition: 0.2s;
+            box-shadow: 0 4px 15px rgba(255, 87, 34, 0.4);
         }
-        .song-btn:hover {
-            background: #ff5722;
-            color: black;
-            font-weight: bold;
+        .enter-btn:hover {
+            background: #f4511e;
         }
-        .year-tag {
-            background: #ff5722;
-            color: black;
+
+        /* लपवलेला युट्यूब प्लेयर */
+        #hidden-youtube-player {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .footer-text {
             font-size: 0.75rem;
-            padding: 2px 6px;
-            border-radius: 4px;
+            color: #666;
+            margin-top: 15px;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="banner">👨‍💻 ही वेबसाईट आदित्य देशमुख यांनी तयार केली आहे</div>
-        
-        <!-- ऑडिओ प्लेअर -->
-        <div class="player-card">
-            <div id="song-title">🎵 खालील गाण्यावर क्लिक करा</div>
-            <audio id="audioPlayer" controls autoplay>
-                तुमच्या ब्राऊझरमध्ये ऑडिओ सपोर्ट नाही.
-            </audio>
+    <div class="saloon-card">
+        <div class="retro-header">💈 आदित्य डीलक्स सैलून 💈</div>
+        <div class="shop-info">
+            कटिंग <span class="price-tag">₹२०</span> | दाढी <span class="price-tag">₹१०</span> | स्पेशल ९०s रेडिओ एफएम
         </div>
 
-        <h3>📻 २००० ते २०१४ सुपरहिट्स</h3>
-
-        <!-- MP3 गाण्यांची यादी -->
-        <div class="song-list">
-            <button class="song-btn" onclick="playAudio('कहो ना प्यार है (2000)', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3')">
-                <span>▶️ १. कहो ना प्यार है</span> <span class="year-tag">2000</span>
-            </button>
-
-            <button class="song-btn" onclick="playAudio('कल हो ना हो (2003)', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3')">
-                <span>▶️ २. कल हो ना हो</span> <span class="year-tag">2003</span>
-            </button>
-
-            <button class="song-btn" onclick="playAudio('तुम से ही (2007)', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3')">
-                <span>▶️ ३. तुम से ही</span> <span class="year-tag">2007</span>
-            </button>
-
-            <button class="song-btn" onclick="playAudio('तू जाने ना (2009)', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3')">
-                <span>▶️ ४. तू जाने ना</span> <span class="year-tag">2009</span>
-            </button>
-
-            <button class="song-btn" onclick="playAudio('तुम ही हो (2013)', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3')">
-                <span>▶️ ५. तुम ही हो</span> <span class="year-tag">2013</span>
-            </button>
+        <!-- गाण्याचे नाव दाखवणारी स्क्रीन -->
+        <div class="display-screen">
+            <div class="now-playing-label">📻 चालू असलेले गाणे</div>
+            <div id="song-title" class="song-name">सैलून सुरू करण्यासाठी बटण दाबा</div>
+            <div id="song-artist" class="artist-name">90s & 2000s FM Radio</div>
         </div>
+
+        <!-- मुख्य स्टार्ट बटण -->
+        <button id="start-btn" class="enter-btn" onclick="startSaloonRadio()">✂️ सैलूनमध्ये या (रेडिओ सुरू करा)</button>
+
+        <!-- प्ले/पॉज आणि नेक्स्ट बटन्स (शुरू झाल्यावर दिसतील) -->
+        <div id="player-controls" class="controls" style="display: none; margin-top: 15px;">
+            <button class="btn" onclick="prevSong()">⏮️ मागे</button>
+            <button class="btn" id="play-pause-btn" onclick="togglePlay()">⏸️ पॉझ</button>
+            <button class="btn" onclick="nextSong()">⏭️ पुढील</button>
+        </div>
+
+        <!-- बॅकग्राउंडला चालणारा लपवलेला यूट्यूब प्लेयर -->
+        <div id="hidden-youtube-player"></div>
+
+        <div class="footer-text">👨‍💻 Designed by Aditya Deshmukh • Powered by YouTube API</div>
     </div>
 
+    <!-- YouTube IFrame Player API script -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+
     <script>
-        function playAudio(title, url) {
-            var player = document.getElementById('audioPlayer');
-            var titleDisplay = document.getElementById('song-title');
+        // २००० आणि ९० च्या दशकातील प्रसिद्ध गाण्यांची लिस्ट (YouTube Video IDs)
+        const playlist = [
+            { id: 'V6g-x1E2wF8', title: 'कहो ना प्यार है', artist: 'उदित नारायण & अलका याग्निक (2000)' },
+            { id: 'g0eO74UmRVs', title: 'कल हो ना हो', artist: 'सोनू निगम (2003)' },
+            { id: 'mt9xg0H2YgY', title: 'तुम से ही (जब वी मेट)', artist: 'मोहित चौहान (2007)' },
+            { id: 'IJq0yyWug1k', title: 'तुम ही हो (आशिकी २)', artist: 'अरिजित सिंग (2013)' },
+            { id: 'P8EF_a-g6vA', title: 'तू जाने ना', artist: 'आतिफ अस्लम (2009)' },
+            { id: '0S_S-kH-qJg', title: 'कजरा रे', artist: 'अलका याग्निक & शंकर महादेवन (2005)' }
+        ];
+
+        let currentIndex = 0;
+        let player;
+        let isPlaying = false;
+
+        // YouTube API लोड झाल्यावर काय करायचे
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('hidden-youtube-player', {
+                height: '1',
+                width: '1',
+                videoId: playlist[currentIndex].id,
+                playerVars: {
+                    'autoplay': 0,
+                    'controls': 0,
+                    'playsinline': 1
+                },
+                events: {
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        // रेडिओ सुरू करणे
+        function startSaloonRadio() {
+            document.getElementById('start-btn').style.display = 'none';
+            document.getElementById('player-controls').style.display = 'flex';
+            loadSong(currentIndex);
+        }
+
+        function loadSong(index) {
+            const song = playlist[index];
+            document.getElementById('song-title').innerText = "▶️ " + song.title;
+            document.getElementById('song-artist').innerText = song.artist;
             
-            player.src = url;
-            titleDisplay.innerText = "▶️ सध्या चालू आहे: " + title;
-            player.play();
+            if (player && player.loadVideoById) {
+                player.loadVideoById(song.id);
+                isPlaying = true;
+                document.getElementById('play-pause-btn').innerText = "⏸️ पॉझ";
+            }
+        }
+
+        function togglePlay() {
+            if (!player) return;
+            if (isPlaying) {
+                player.pauseVideo();
+                document.getElementById('play-pause-btn').innerText = "▶️ प्ले";
+                isPlaying = false;
+            } else {
+                player.playVideo();
+                document.getElementById('play-pause-btn').innerText = "⏸️ पॉझ";
+                isPlaying = true;
+            }
+        }
+
+        function nextSong() {
+            currentIndex = (currentIndex + 1) % playlist.length;
+            loadSong(currentIndex);
+        }
+
+        function prevSong() {
+            currentIndex = (currentIndex - 1 + playlist.length) % playlist.length;
+            loadSong(currentIndex);
+        }
+
+        // गाणे संपल्यावर आपोआप पुढचे गाणे सुरू होईल
+        function onPlayerStateChange(event) {
+            if (event.data === YT.PlayerState.ENDED) {
+                nextSong();
+            }
         }
     </script>
 
 </body>
-</html>
+    </html>
+    
