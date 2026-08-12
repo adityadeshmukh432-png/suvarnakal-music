@@ -1,1 +1,97 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>सुवर्णकाळ (२०००-२०१२) 🎶 म्युझिक प्लेयर</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #fdf2e9; color: #333; overflow: hidden; }
+        #splash-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #ffab40; display: flex; justify-content: center; align-items: center; z-index: 1000; transition: opacity 2s ease-in-out; }
+        #splash-screen img { max-width: 100%; max-height: 100%; object-fit: cover; }
+        #main-container { display: none; width: 100%; height: 100vh; flex-direction: column; justify-content: center; align-items: center; background: linear-gradient(135deg, #fdf2e9 0%, #ffe0b2 100%); padding: 20px; box-sizing: border-box; }
+        .player-card { background-color: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); text-align: center; width: 90%; max-width: 450px; border: 5px solid #ffab40; }
+        #song-cover { width: 200px; height: 200px; border-radius: 50%; background-color: #ddd; margin: 0 auto 20px auto; border: 8px solid #fdf2e9; box-shadow: 0 5px 15px rgba(0,0,0,0.1); display: flex; justify-content: center; align-items: center; font-size: 3rem; }
+        #song-title { font-size: 1.8rem; font-weight: bold; color: #d84315; margin: 0; }
+        #song-singer { font-size: 1.1rem; color: #7f8c8d; margin: 5px 0 20px 0; }
+        .controls { display: flex; justify-content: center; gap: 20px; margin-top: 30px; }
+        button { background: none; border: none; font-size: 2rem; color: #d84315; cursor: pointer; transition: transform 0.2s; }
+        button:hover { transform: scale(1.2); }
+        button:disabled { color: #ccc; cursor: default; }
+    </style>
+</head>
+<body>
+    <div id="splash-screen">
+        <img src="image_0.png" alt="मराठी संस्कृती">
+    </div>
+    <div id="main-container">
+        <div class="player-card">
+            <div id="song-cover">💿</div>
+            <p id="song-title">गाण्याचे नाव</p>
+            <p id="song-singer">गायक/गायिका, वर्ष</p>
+            <div class="controls">
+                <button id="prevBtn" title="मागचे">⏮️</button>
+                <button id="playPauseBtn" title="प्ले/पॉज">⏯️</button>
+                <button id="nextBtn" title="पुढचे">⏭️</button>
+            </div>
+        </div>
+    </div>
+    <audio id="audio-player"></audio>
+    <script>
+        const songsData = [
+            { title: "राधा ही बावरी", singer: "स्वप्नील बांदोडकर, २०१२", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" },
+            { title: "अप्सरा आली", singer: "अजय-अतुल, बेला शेंडे, २०१०", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" },
+            { title: "जीव रंगला", singer: "अजय-अतुल, २००९", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" },
+            { title: "मन उधाण वार्याचे", singer: "शंकर महादेवन, २००४", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" },
+            { title: "वेड लागली", singer: "स्वप्नील बांदोडकर, २००६", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3" }
+        ];
+        let currentSongIndex = 0;
+        let isPlaying = false;
+        const audio = document.getElementById('audio-player');
+        const songCover = document.getElementById('song-cover');
+        const songTitle = document.getElementById('song-title');
+        const songSinger = document.getElementById('song-singer');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const prevBtn = document.getElementById('prevBtn');
+
+        function loadSong(index) {
+            currentSongIndex = index;
+            const song = songsData[currentSongIndex];
+            audio.src = song.src;
+            songTitle.innerText = song.title;
+            songSinger.innerText = song.singer;
+            prevBtn.disabled = currentSongIndex === 0;
+            nextBtn.disabled = currentSongIndex === songsData.length - 1;
+            if (isPlaying) { audio.play(); songCover.innerHTML = "🎶"; } 
+            else { songCover.innerHTML = "💿"; }
+        }
+        function playPauseSong() {
+            if (isPlaying) { audio.pause(); isPlaying = false; songCover.innerHTML = "💿"; } 
+            else { audio.play(); isPlaying = true; songCover.innerHTML = "🎶"; }
+        }
+        function nextSong() {
+            if (currentSongIndex < songsData.length - 1) { isPlaying = true; loadSong(currentSongIndex + 1); }
+        }
+        function prevSong() {
+            if (currentSongIndex > 0) { isPlaying = true; loadSong(currentSongIndex - 1); }
+        }
+        playPauseBtn.addEventListener('click', playPauseSong);
+        nextBtn.addEventListener('click', nextSong);
+        prevBtn.addEventListener('click', prevSong);
+        audio.addEventListener('ended', nextSong);
+
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const splash = document.getElementById('splash-screen');
+                const main = document.getElementById('main-container');
+                splash.style.opacity = '0';
+                main.style.display = 'flex';
+                setTimeout(() => { splash.style.display = 'none'; }, 2000);
+                isPlaying = true;
+                loadSong(0);
+            }, 5000);
+        });
+    </script>
+</body>
+</html>
 
