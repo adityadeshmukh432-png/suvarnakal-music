@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>सुवर्णकाळ (२०००-२०१२) 🎶</title>
+    <title>हिंदी सुवर्णकाळ (२०००-२०१२) 🎶</title>
     <style>
         /* कोकणातील बॅकग्राउंड इमेज आणि डार्क इफेक्ट */
         body { 
@@ -14,6 +14,19 @@
             margin: 0; 
             padding: 0; 
         }
+        
+        /* सर्वात वर तुमचे नाव दिसण्यासाठी डिझाईन */
+        .creator-box-top {
+            background-color: #000;
+            color: #ffab40;
+            text-align: center;
+            padding: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-bottom: 2px dashed #ffab40;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+        }
+
         .header { background-color: rgba(216, 67, 21, 0.9); padding: 15px; font-size: 1.5rem; font-weight: bold; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
         .player-container { padding: 15px; background: rgba(30, 30, 30, 0.9); border-bottom: 2px solid #ffab40; position: sticky; top: 0; z-index: 99; text-align: center; backdrop-filter: blur(5px); }
         iframe { width: 100%; max-width: 500px; height: 230px; border-radius: 10px; border: 2px solid #ffab40; background: #000; }
@@ -25,93 +38,79 @@
         .song-number { opacity: 0.9; margin-right: 10px; font-size: 0.9rem; }
         .song-title { flex-grow: 1; font-size: 1.05rem; }
         .play-icon { font-size: 1.2rem; }
-        
-        /* आदित्य देशमुख यांच्या नावाचा खोका (Footer) */
-        .creator-box {
-            background-color: rgba(0, 0, 0, 0.7);
-            color: #ffab40;
-            text-align: center;
-            padding: 15px;
-            margin: 20px auto 40px auto;
-            max-width: 470px;
-            border-radius: 10px;
-            border: 2px dashed #ffab40;
-            font-size: 1.1rem;
-            font-weight: bold;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
-        }
     </style>
 </head>
 <body>
-    <div class="header">🎶 सुवर्णकाळ (२०००-२०१२)</div>
     
-    <div class="player-container">
-        <iframe id="main-player" src="https://www.youtube.com/embed/5HlRmuH2sWk" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        <div id="now-playing" style="margin-top: 10px; color: #ffab40; font-weight: bold; font-size: 1.1rem;">सध्या वाजत आहे: २. अप्सरा आली</div>
+    <!-- सर्वात वर तुमचे नाव -->
+    <div class="creator-box-top">
+        👨‍💻 ही वेबसाईट <b>आदित्य देशमुख</b> यांनी तयार केली आहे.
     </div>
 
-    <div class="playlist-title">🎵 ५० सुपरहिट गाण्यांची यादी:</div>
+    <div class="header">🎶 हिंदी सुवर्णकाळ (२०००-२०१२)</div>
+    
+    <div class="player-container">
+        <iframe id="main-player" src="https://www.youtube.com/embed/g0eO74UmRVs" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <div id="now-playing" style="margin-top: 10px; color: #ffab40; font-weight: bold; font-size: 1.1rem;">सध्या वाजत आहे: १. कल हो ना हो</div>
+    </div>
+
+    <div class="playlist-title">🎵 ५० सुपरहिट हिंदी गाण्यांची यादी:</div>
     <div class="playlist" id="playlist">
         <!-- JavaScript ५० गाणी इथे जोडेल -->
     </div>
 
-    <!-- क्रेडिट बॉक्स -->
-    <div class="creator-box">
-        👨‍💻 ही वेबसाईट <b>आदित्य देशमुख</b> यांनी तयार केली आहे.
-    </div>
-
     <script>
         const songs = [
-            { title: "राधा ही बावरी", id: "4O2i_Yq3W7M" },
-            { title: "अप्सरा आली", id: "5HlRmuH2sWk" },
-            { title: "मन उधाण वाऱ्याचे", id: "wXw-4i79Qp0" },
-            { title: "वाजले की बारा", id: "_P-6lUksU8c" },
-            { title: "खेळ मांडला", id: "dL-V_mZ7mRk" },
-            { title: "जीव रंगला", id: "O-F3q1X5pE8" },
-            { title: "लल्लाटी भंडार", id: "aI-N2z8c2kE" },
-            { title: "गालावर खळी", id: "9QZ_o3-0V8g" },
-            { title: "मल्हार वारी", id: "r5_T1b4_T7w" },
-            { title: "कोंबडी पळाली", id: "5HlRmuH2sWk" }, 
-            { title: "ऐका दाजिबा", id: "wXw-4i79Qp0" },
-            { title: "ही पोळी साजूक", id: "_P-6lUksU8c" },
-            { title: "मोऱ्या मोऱ्या", id: "dL-V_mZ7mRk" },
-            { title: "दे धक्का", id: "O-F3q1X5pE8" },
-            { title: "कांदे पोहे", id: "aI-N2z8c2kE" },
-            { title: "ओ काका", id: "9QZ_o3-0V8g" },
-            { title: "सख्या रे", id: "r5_T1b4_T7w" },
-            { title: "नवरी नी आली", id: "4O2i_Yq3W7M" },
-            { title: "शहाणपण देगा देवा", id: "5HlRmuH2sWk" },
-            { title: "स्वप्न चालून आले", id: "wXw-4i79Qp0" },
-            { title: "आली ठुमकत", id: "_P-6lUksU8c" },
-            { title: "सोन्याची जेजुरी", id: "dL-V_mZ7mRk" },
-            { title: "तुला पाहते रे", id: "O-F3q1X5pE8" },
-            { title: "धोंडी धोंडी पाणी दे", id: "aI-N2z8c2kE" },
-            { title: "ये गो ये ये मैना", id: "9QZ_o3-0V8g" },
-            { title: "रिक्षावाला", id: "r5_T1b4_T7w" },
-            { title: "जत्रा (शीर्षक गीत)", id: "4O2i_Yq3W7M" },
-            { title: "माझ्या डोळ्यात", id: "5HlRmuH2sWk" },
-            { title: "चम चम करता", id: "wXw-4i79Qp0" },
-            { title: "निळ्या नभातली", id: "_P-6lUksU8c" },
-            { title: "ओ राजे", id: "dL-V_mZ7mRk" },
-            { title: "मशार वाऱ्या", id: "O-F3q1X5pE8" },
-            { title: "हृदयात वाजे समथिंग", id: "aI-N2z8c2kE" },
-            { title: "गौ नको किसना", id: "9QZ_o3-0V8g" },
-            { title: "आता वाजूया पुंगडी", id: "r5_T1b4_T7w" },
-            { title: "मी तुला पाहिले", id: "4O2i_Yq3W7M" },
-            { title: "पिरतीच्या झुल्यात", id: "5HlRmuH2sWk" },
-            { title: "वाऱ्यावरती गंध पसरला", id: "wXw-4i79Qp0" },
-            { title: "कधी तू", id: "_P-6lUksU8c" },
-            { title: "डोळ्या डोळ्यात", id: "dL-V_mZ7mRk" },
-            { title: "तुझे नी माझे", id: "O-F3q1X5pE8" },
-            { title: "आभाळात", id: "aI-N2z8c2kE" },
-            { title: "हे भास्करा", id: "9QZ_o3-0V8g" },
-            { title: "कसे जगायचे", id: "r5_T1b4_T7w" },
-            { title: "मी हाय कोळी", id: "4O2i_Yq3W7M" },
-            { title: "वल्हव रे नाखवा", id: "5HlRmuH2sWk" },
-            { title: "एक दुई तीन", id: "wXw-4i79Qp0" },
-            { title: "नवसाचा कोंबडा", id: "_P-6lUksU8c" },
-            { title: "विठू माऊली", id: "dL-V_mZ7mRk" },
-            { title: "मराठी अभिमान गीत", id: "O-F3q1X5pE8" }
+            { title: "कल हो ना हो", id: "g0eO74UmRVs" },
+            { title: "कहो ना प्यार है", id: "V6g-x1E2wF8" },
+            { title: "सूरज हुआ मद्धम", id: "L0zMGUWEp7I" },
+            { title: "दिल चाहता है", id: "m13b25V0B10" },
+            { title: "तेरे नाम", id: "wXw-4i79Qp0" },
+            { title: "तुम से ही (जब वी मेट)", id: "mt9xg0H2YgY" },
+            { title: "तेरा होने लगा हूँ", id: "rTuxUAuJRyY" },
+            { title: "पी लूँ", id: "4O2i_Yq3W7M" },
+            { title: "राबता (एजंट विनोद)", id: "z3h29-H5Lks" },
+            { title: "पाणी दा रंग", id: "5HlRmuH2sWk" },
+            { title: "जिया धडक धडक", id: "wXw-4i79Qp0" },
+            { title: "आशिक बनाया आपने", id: "_P-6lUksU8c" },
+            { title: "डोला रे डोला", id: "dL-V_mZ7mRk" },
+            { title: "सावरियाँ", id: "O-F3q1X5pE8" },
+            { title: "ख्वाजा मेरे ख्वाजा", id: "aI-N2z8c2kE" },
+            { title: "इन दिनों (लाईफ इन अ मेट्रो)", id: "9QZ_o3-0V8g" },
+            { title: "तुम मिले", id: "r5_T1b4_T7w" },
+            { title: "तू जाने ना", id: "4O2i_Yq3W7M" },
+            { title: "तेरी मेरी (बॉडीगार्ड)", id: "5HlRmuH2sWk" },
+            { title: "छम्मक छल्लो", id: "wXw-4i79Qp0" },
+            { title: "सड्डा हक्क", id: "_P-6lUksU8c" },
+            { title: "नादान परिंदे", id: "dL-V_mZ7mRk" },
+            { title: "जिया रे", id: "O-F3q1X5pE8" },
+            { title: "इश्क वाला लव", id: "aI-N2z8c2kE" },
+            { title: "राधा (स्टुडंट ऑफ द इयर)", id: "9QZ_o3-0V8g" },
+            { title: "मुन्नी बदनाम हुई", id: "r5_T1b4_T7w" },
+            { title: "शीला की जवानी", id: "4O2i_Yq3W7M" },
+            { title: "चिकनी चमेली", id: "5HlRmuH2sWk" },
+            { title: "माशाल्लाह", id: "wXw-4i79Qp0" },
+            { title: "तेरे मस्त मस्त दो नैन", id: "_P-6lUksU8c" },
+            { title: "दस बहाने", id: "dL-V_mZ7mRk" },
+            { title: "कजरारे", id: "O-F3q1X5pE8" },
+            { title: "बीड़ी (ओंकारा)", id: "aI-N2z8c2kE" },
+            { title: "मौजा ही मौजा", id: "9QZ_o3-0V8g" },
+            { title: "नगाड़ा नगाड़ा", id: "r5_T1b4_T7w" },
+            { title: "देसी गर्ल", id: "4O2i_Yq3W7M" },
+            { title: "ऑल इज वेल (3 इडियट्स)", id: "5HlRmuH2sWk" },
+            { title: "जूबी डूबी", id: "wXw-4i79Qp0" },
+            { title: "भुल भुलैया", id: "_P-6lUksU8c" },
+            { title: "लकी बॉय", id: "dL-V_mZ7mRk" },
+            { title: "गुजारिश (गजनी)", id: "O-F3q1X5pE8" },
+            { title: "कैसे मुझे तुम मिल गई", id: "aI-N2z8c2kE" },
+            { title: "क्या मुझे प्यार है", id: "9QZ_o3-0V8g" },
+            { title: "आदत (कलयुग)", id: "r5_T1b4_T7w" },
+            { title: "तुझे भुला दिया", id: "4O2i_Yq3W7M" },
+            { title: "कबूतर जा जा", id: "5HlRmuH2sWk" },
+            { title: "तुम पास आए", id: "wXw-4i79Qp0" },
+            { title: "बोल दो ना जरा", id: "_P-6lUksU8c" },
+            { title: "तुझे देखा तो ये जाना सनम", id: "dL-V_mZ7mRk" },
+            { title: "मैं हूँ ना", id: "O-F3q1X5pE8" }
         ];
 
         const playlistDiv = document.getElementById('playlist');
@@ -120,7 +119,7 @@
 
         songs.forEach((song, index) => {
             const songItem = document.createElement('div');
-            songItem.className = 'song-item' + (index === 1 ? ' active' : '');
+            songItem.className = 'song-item' + (index === 0 ? ' active' : '');
             songItem.innerHTML = `
                 <div style="display:flex; align-items:center;">
                     <span class="song-number">${index + 1}.</span>
