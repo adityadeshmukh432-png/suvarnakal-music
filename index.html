@@ -3,294 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>रेडिओ सुवर्णकाळ 📻</title>
+    <title>Aditya Music App</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, sans-serif;
-            background: linear-gradient(rgba(18, 18, 18, 0.85), rgba(18, 18, 18, 0.85)), url('https://images.unsplash.com/photo-1596423735880-5f2a689b903e?q=80&w=1080&auto=format&fit=crop') no-repeat center center fixed;
-            background-size: cover;
-            color: #fff;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-        }
-        .creator-box-top {
-            background-color: #000;
-            color: #ffab40;
-            text-align: center;
-            padding: 10px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            border-bottom: 2px dashed #ffab40;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
-        }
-        .radio-container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        .radio-box {
-            background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
-            border: 4px solid #ffab40;
-            border-radius: 20px;
-            padding: 30px;
-            width: 100%;
-            max-width: 350px;
-            text-align: center;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5), inset 0 0 15px rgba(0,0,0,0.8);
-        }
-        .radio-title {
-            color: #d84315;
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 20px;
-            text-shadow: 1px 1px 2px black;
-        }
-        .speaker-grill {
-            background: repeating-linear-gradient(45deg, #111, #111 5px, #222 5px, #222 10px);
-            height: 100px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            border: 2px solid #000;
-            box-shadow: inset 0 0 10px #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
-        .music-waves {
-            display: flex;
-            gap: 5px;
-            height: 50px;
-            align-items: center;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .wave {
-            width: 8px;
-            height: 100%;
-            background-color: #ffab40;
-            animation: wave-anim 1s infinite ease-in-out;
-        }
-        .wave:nth-child(2) { animation-delay: 0.2s; }
-        .wave:nth-child(3) { animation-delay: 0.4s; }
-        .wave:nth-child(4) { animation-delay: 0.6s; }
-        .wave:nth-child(5) { animation-delay: 0.8s; }
-
-        @keyframes wave-anim {
-            0%, 100% { height: 10px; }
-            50% { height: 50px; }
-        }
-        .song-display {
-            background-color: #000;
-            color: #0f0; 
-            padding: 15px;
-            border-radius: 5px;
-            font-family: monospace;
-            font-size: 1.1rem;
-            margin-bottom: 25px;
-            min-height: 25px;
-            border: 2px inset #333;
-            box-shadow: inset 0 0 5px #0f0;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .controls {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            align-items: center;
-        }
-        .control-btn {
-            background: #d84315;
-            color: #fff;
-            border: 2px solid #ffab40;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            font-size: 1.5rem;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.4);
-            transition: transform 0.1s;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .control-btn:active {
-            transform: scale(0.9);
-            box-shadow: 0 1px 2px rgba(0,0,0,0.4);
-        }
-        /* व्हिडिओ पूर्णपणे लपवण्यासाठी */
-        #ytplayer {
-            position: absolute;
-            top: -9999px;
-            left: -9999px;
-            width: 1px;
-            height: 1px;
-            opacity: 0;
-            pointer-events: none;
-        }
+        body { margin: 0; background: #0f0f0f; color: #fff; font-family: 'Arial', sans-serif; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; }
+        .top-bar { position: absolute; top: 10px; background: #1a1a1a; padding: 10px 20px; border-radius: 50px; border: 1px solid #ff5722; color: #ff5722; font-weight: bold; }
+        .app-container { width: 90%; max-width: 400px; background: #1a1a1a; padding: 30px; border-radius: 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); text-align: center; }
+        .album-art { width: 200px; height: 200px; background: #ff5722; border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 5rem; box-shadow: 0 0 30px rgba(255,87,34,0.3); }
+        .song-title { font-size: 1.5rem; margin-bottom: 20px; height: 30px; overflow: hidden; white-space: nowrap; }
+        .controls { display: flex; justify-content: center; gap: 30px; }
+        .btn { background: #333; color: white; border: none; padding: 15px 25px; border-radius: 50px; font-size: 1.2rem; cursor: pointer; }
+        .btn:active { background: #ff5722; }
     </style>
 </head>
-<body>
+<body onclick="startMusic()">
 
-    <div class="creator-box-top">
-        👨‍💻 ही वेबसाईट <b>आदित्य देशमुख</b> यांनी तयार केली आहे.
-    </div>
+    <div class="top-bar">👨‍💻 Aditya Deshmukh Digital App</div>
 
-    <div class="radio-container">
-        <div class="radio-box">
-            <div class="radio-title">📻 जुन्या आठवणींचा रेडिओ</div>
-            
-            <div class="speaker-grill">
-                <div class="music-waves" id="waves">
-                    <div class="wave"></div>
-                    <div class="wave"></div>
-                    <div class="wave"></div>
-                    <div class="wave"></div>
-                    <div class="wave"></div>
-                </div>
-            </div>
-
-            <div class="song-display" id="songTitle">
-                रेडिओ बंद आहे. ▶️ दाबा
-            </div>
-
-            <div class="controls">
-                <button class="control-btn" onclick="prevSong()" title="मागील गाणे">⏮️</button>
-                <button class="control-btn" onclick="togglePlay()" id="playBtn" style="width: 75px; height: 75px; font-size: 2rem;" title="प्ले/पॉज">▶️</button>
-                <button class="control-btn" onclick="nextSong()" title="पुढील गाणे">⏭️</button>
-            </div>
+    <div class="app-container">
+        <div class="album-art">🎵</div>
+        <div class="song-title" id="display">स्क्रीनवर क्लिक करा...</div>
+        <div class="controls">
+            <button class="btn" onclick="prevSong()">⏮️</button>
+            <button class="btn" id="playBtn" onclick="togglePlay()">▶️</button>
+            <button class="btn" onclick="nextSong()">⏭️</button>
         </div>
     </div>
 
-    <!-- लपवलेला प्लेयर -->
-    <div id="ytplayer"></div>
+    <div id="player" style="display:none;"></div>
 
     <script>
-        // २५ हिंदी गाण्यांची लपवलेली यादी
         const songs = [
-            { title: "१. कल हो ना हो", id: "g0eO74UmRVs" },
-            { title: "२. सूरज हुआ मद्धम", id: "L0zMGUWEp7I" },
-            { title: "३. कहो ना प्यार है", id: "V6g-x1E2wF8" },
-            { title: "४. तुम से ही", id: "mt9xg0H2YgY" },
-            { title: "५. तेरे नाम", id: "wXw-4i79Qp0" },
-            { title: "६. तेरा होने लगा हूँ", id: "rTuxUAuJRyY" },
-            { title: "७. पी लूँ", id: "4O2i_Yq3W7M" },
-            { title: "८. जिया धडक धडक", id: "wXw-4i79Qp0" },
-            { title: "९. डोला रे डोला", id: "dL-V_mZ7mRk" },
-            { title: "१०. इन दिनों", id: "9QZ_o3-0V8g" },
-            { title: "११. तू जाने ना", id: "4O2i_Yq3W7M" },
-            { title: "१२. तेरी मेरी", id: "5HlRmuH2sWk" },
-            { title: "१३. छम्मक छल्लो", id: "wXw-4i79Qp0" },
-            { title: "१४. सड्डा हक्क", id: "_P-6lUksU8c" },
-            { title: "१५. जिया रे", id: "O-F3q1X5pE8" },
-            { title: "१६. राधा", id: "9QZ_o3-0V8g" },
-            { title: "१७. मुन्नी बदनाम हुई", id: "r5_T1b4_T7w" },
-            { title: "१८. शीला की जवानी", id: "4O2i_Yq3W7M" },
-            { title: "१९. माशाल्लाह", id: "wXw-4i79Qp0" },
-            { title: "२०. तेरे मस्त मस्त दो नैन", id: "_P-6lUksU8c" },
-            { title: "२१. कजरारे", id: "O-F3q1X5pE8" },
-            { title: "२२. मौजा ही मौजा", id: "9QZ_o3-0V8g" },
-            { title: "२३. देसी गर्ल", id: "4O2i_Yq3W7M" },
-            { title: "२४. जूबी डूबी", id: "wXw-4i79Qp0" },
-            { title: "२५. भुल भुलैया", id: "_P-6lUksU8c" }
+            { title: "कल हो ना हो", id: "g0eO74UmRVs" }, { title: "सूरज हुआ मद्धम", id: "L0zMGUWEp7I" },
+            { title: "कहो ना प्यार है", id: "V6g-x1E2wF8" }, { title: "तुम से ही", id: "mt9xg0H2YgY" },
+            { title: "तेरे नाम", id: "wXw-4i79Qp0" }, { title: "तेरा होने लगा हूँ", id: "rTuxUAuJRyY" },
+            { title: "पी लूँ", id: "4O2i_Yq3W7M" }, { title: "जिया धडक", id: "wXw-4i79Qp0" },
+            { title: "डोला रे डोला", id: "dL-V_mZ7mRk" }, { title: "इन दिनों", id: "9QZ_o3-0V8g" }
         ];
-
-        let player;
         let currentIndex = 0;
-        let isPlaying = false;
-        let isPlayerReady = false;
+        let player, isPlaying = false;
 
-        // युट्युबचा लपलेला ऑडिओ प्लेयर चालू करणे
+        function startMusic() {
+            if(!isPlaying) togglePlay();
+        }
+
         const tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
-        const firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        document.head.appendChild(tag);
 
         function onYouTubeIframeAPIReady() {
-            player = new YT.Player('ytplayer', {
-                height: '1',
-                width: '1',
-                videoId: songs[0].id,
-                playerVars: { 'autoplay': 0, 'controls': 0, 'disablekb': 1 },
-                events: {
-                    'onReady': onPlayerReady,
-                    'onStateChange': onPlayerStateChange,
-                    'onError': onPlayerError
-                }
+            player = new YT.Player('player', {
+                height: '0', width: '0', videoId: songs[0].id,
+                events: { 'onStateChange': (e) => { if(e.data === 0) nextSong(); } }
             });
         }
 
-        function onPlayerReady(event) {
-            isPlayerReady = true;
-            document.getElementById('songTitle').innerText = "रेडिओ तयार आहे! ▶️ दाबा";
-        }
-
-        function onPlayerStateChange(event) {
-            if (event.data === YT.PlayerState.PLAYING) {
-                isPlaying = true;
-                document.getElementById('playBtn').innerText = "⏸️";
-                document.getElementById('waves').style.opacity = "1";
-                document.getElementById('songTitle').innerText = songs[currentIndex].title;
-            } else if (event.data === YT.PlayerState.PAUSED) {
-                isPlaying = false;
-                document.getElementById('playBtn').innerText = "▶️";
-                document.getElementById('waves').style.opacity = "0";
-                document.getElementById('songTitle').innerText = "रेडिओ थांबला आहे";
-            } else if (event.data === YT.PlayerState.ENDED) {
-                // गाणे संपल्यावर आपोआप पुढचे गाणे लावणे (रेडिओ स्टाईल)
-                nextSong();
-            }
-        }
-
-        function onPlayerError(event) {
-            // जर गाणे उपलब्ध नसेल, तर न थांबता आपोआप पुढचे गाणे लावणे
-            nextSong();
-        }
-
         function togglePlay() {
-            if (!isPlayerReady) return;
-            
-            if (isPlaying) {
-                player.pauseVideo();
-            } else {
-                document.getElementById('songTitle').innerText = "स्टेशन शोधत आहे...";
-                player.playVideo();
-            }
+            if(isPlaying) { player.pauseVideo(); isPlaying = false; document.getElementById('playBtn').innerText = "▶️"; }
+            else { player.playVideo(); isPlaying = true; document.getElementById('playBtn').innerText = "⏸️"; document.getElementById('display').innerText = songs[currentIndex].title; }
         }
 
-        function nextSong() {
-            if (!isPlayerReady) return;
-            currentIndex++;
-            if (currentIndex >= songs.length) {
-                currentIndex = 0; // शेवटच्या गाण्यानंतर पुन्हा पहिल्या गाण्यावर जाणे
-            }
-            playCurrentSong();
-        }
-
-        function prevSong() {
-            if (!isPlayerReady) return;
-            currentIndex--;
-            if (currentIndex < 0) {
-                currentIndex = songs.length - 1;
-            }
-            playCurrentSong();
-        }
-
-        function playCurrentSong() {
-            document.getElementById('songTitle').innerText = "स्टेशन शोधत आहे...";
-            document.getElementById('waves').style.opacity = "0";
-            player.loadVideoById(songs[currentIndex].id);
-            player.playVideo();
-        }
+        function nextSong() { currentIndex = (currentIndex + 1) % songs.length; player.loadVideoById(songs[currentIndex].id); player.playVideo(); document.getElementById('display').innerText = songs[currentIndex].title; }
+        function prevSong() { currentIndex = (currentIndex - 1 + songs.length) % songs.length; player.loadVideoById(songs[currentIndex].id); player.playVideo(); document.getElementById('display').innerText = songs[currentIndex].title; }
     </script>
 </body>
-    </html>
-                    
+</html>
