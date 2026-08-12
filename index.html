@@ -3,13 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>आदित्य म्युझिक ॲप (2000 - 2014 सुपरहिट्स)</title>
+    <title>Aditya Music App</title>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body { 
             background: #121212; 
             color: white; 
@@ -17,60 +13,36 @@
             font-family: Arial, sans-serif; 
             padding: 15px; 
         }
-        .container {
-            max-width: 500px;
-            margin: 0 auto;
-        }
+        .container { max-width: 450px; margin: 0 auto; }
         .banner { 
             background: #ff5722; 
             padding: 15px; 
             border-radius: 10px; 
             margin-bottom: 20px; 
             font-weight: bold; 
-            box-shadow: 0 4px 10px rgba(255, 87, 34, 0.3);
         }
-        h2 {
-            margin-bottom: 15px;
-            font-size: 1.2rem;
-            color: #ff9800;
-        }
-        /* प्लेअर बॉक्स */
-        .player-box {
+        
+        /* ऑडिओ प्लेयर बॉक्स */
+        .player-card {
             position: sticky;
             top: 10px;
-            background: #1e1e1e;
-            padding: 10px;
+            background: #252525;
+            padding: 15px;
             border-radius: 12px;
             margin-bottom: 20px;
             border: 2px solid #ff5722;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.8);
-            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            z-index: 10;
         }
         #song-title {
             font-size: 1rem;
-            color: #fff;
-            margin-bottom: 8px;
+            color: #ff9800;
+            margin-bottom: 10px;
             font-weight: bold;
         }
-        .iframe-container {
-            position: relative;
-            width: 100%;
-            height: 200px;
-            border-radius: 8px;
-            overflow: hidden;
-            background: #000;
-        }
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        /* गाण्यांच्या यादीची स्टाईल */
-        .song-list {
-            max-height: 400px;
-            overflow-y: auto;
-            padding-right: 5px;
-        }
+        audio { width: 100%; height: 40px; }
+
+        /* गाण्यांची यादी */
         .song-btn { 
             display: flex;
             justify-content: space-between;
@@ -78,32 +50,25 @@
             width: 100%; 
             margin: 8px 0; 
             padding: 12px 15px; 
-            background: #252525; 
+            background: #1e1e1e; 
             color: white; 
             border: 1px solid #444; 
             border-radius: 8px; 
             font-size: 0.95rem; 
             cursor: pointer;
             transition: 0.2s;
-            text-align: left;
         }
         .song-btn:hover {
             background: #ff5722;
             color: black;
-            border-color: #ff5722;
             font-weight: bold;
         }
         .year-tag {
             background: #ff5722;
             color: black;
             font-size: 0.75rem;
-            padding: 3px 7px;
+            padding: 2px 6px;
             border-radius: 4px;
-            font-weight: bold;
-        }
-        .song-btn:hover .year-tag {
-            background: black;
-            color: white;
         }
     </style>
 </head>
@@ -112,88 +77,48 @@
     <div class="container">
         <div class="banner">👨‍💻 ही वेबसाईट आदित्य देशमुख यांनी तयार केली आहे</div>
         
-        <!-- व्हिडिओ/ऑडिओ प्लेअर -->
-        <div class="player-box">
-            <div id="song-title">🎵 खालीलपैकी कोणतेही गाणे निवडा</div>
-            <div class="iframe-container">
-                <iframe id="youtubePlayer" src="https://www.youtube.com/embed/V6g-x1E2wF8" allow="autoplay"></iframe>
-            </div>
+        <!-- ऑडिओ प्लेअर -->
+        <div class="player-card">
+            <div id="song-title">🎵 खालील गाण्यावर क्लिक करा</div>
+            <audio id="audioPlayer" controls autoplay>
+                तुमच्या ब्राऊझरमध्ये ऑडिओ सपोर्ट नाही.
+            </audio>
         </div>
 
-        <h2>📻 २००० ते २०१४ मधील गाणी</h2>
+        <h3>📻 २००० ते २०१४ सुपरहिट्स</h3>
 
-        <!-- गाण्यांची यादी (2000 - 2014) -->
+        <!-- MP3 गाण्यांची यादी -->
         <div class="song-list">
-            <button class="song-btn" onclick="playSong('कहो ना प्यार है', 'V6g-x1E2wF8')">
-                <span>▶️ कहो ना प्यार है</span> <span class="year-tag">2000</span>
+            <button class="song-btn" onclick="playAudio('कहो ना प्यार है (2000)', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3')">
+                <span>▶️ १. कहो ना प्यार है</span> <span class="year-tag">2000</span>
             </button>
 
-            <button class="song-btn" onclick="playSong('मितवा (लगान)', 'XmB_I7AAnr8')">
-                <span>▶️ मितवा (लगान)</span> <span class="year-tag">2001</span>
+            <button class="song-btn" onclick="playAudio('कल हो ना हो (2003)', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3')">
+                <span>▶️ २. कल हो ना हो</span> <span class="year-tag">2003</span>
             </button>
 
-            <button class="song-btn" onclick="playSong('डोला रे डोला (देवदास)', 'Jbn39j-xa-k')">
-                <span>▶️ डोला रे डोला</span> <span class="year-tag">2002</span>
+            <button class="song-btn" onclick="playAudio('तुम से ही (2007)', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3')">
+                <span>▶️ ३. तुम से ही</span> <span class="year-tag">2007</span>
             </button>
 
-            <button class="song-btn" onclick="playSong('कल हो ना हो', 'g0eO74UmRVs')">
-                <span>▶️ कल हो ना हो</span> <span class="year-tag">2003</span>
+            <button class="song-btn" onclick="playAudio('तू जाने ना (2009)', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3')">
+                <span>▶️ ४. तू जाने ना</span> <span class="year-tag">2009</span>
             </button>
 
-            <button class="song-btn" onclick="playSong('मंै हूँ ना', 'eK34M_4749Y')">
-                <span>▶️ मैं हूँ ना</span> <span class="year-tag">2004</span>
-            </button>
-
-            <button class="song-btn" onclick="playSong('कजरा रे (बंटी और बबली)', '0S_S-kH-qJg')">
-                <span>▶️ कजरा रे</span> <span class="year-tag">2005</span>
-            </button>
-
-            <button class="song-btn" onclick="playSong('चांद सिफारिश (फना)', 'zWEOx7M_VKA')">
-                <span>▶️ चांद सिफारिश</span> <span class="year-tag">2006</span>
-            </button>
-
-            <button class="song-btn" onclick="playSong('तुम से ही (जब वी मेट)', 'mt9xg0H2YgY')">
-                <span>▶️ तुम से ही</span> <span class="year-tag">2007</span>
-            </button>
-
-            <button class="song-btn" onclick="playSong('तेरी ओर (सिंग इज किंग)', 'P8R2-2eJ1E0')">
-                <span>▶️ तेरी ओर</span> <span class="year-tag">2008</span>
-            </button>
-
-            <button class="song-btn" onclick="playSong('तू जाने ना (अजब प्रेम की गजब कहानी)', 'P8EF_a-g6vA')">
-                <span>▶️ तू जाने ना</span> <span class="year-tag">2009</span>
-            </button>
-
-            <button class="song-btn" onclick="playSong('पी लूं (वन्स अपॉन अ टाइम)', '4q08j2JtP84')">
-                <span>▶️ पी लूं</span> <span class="year-tag">2010</span>
-            </button>
-
-            <button class="song-btn" onclick="playSong('तेरी मेरी (बॉडीगार्ड)', 'p_m1G2y8v8M')">
-                <span>▶️ तेरी मेरी प्रेम कहानी</span> <span class="year-tag">2011</span>
-            </button>
-
-            <button class="song-btn" onclick="playSong('पानी दा रंग (विकी डोनर)', '1v9q3gR4154')">
-                <span>▶️ पानी दा रंग</span> <span class="year-tag">2012</span>
-            </button>
-
-            <button class="song-btn" onclick="playSong('तुम ही हो (आशिकी २)', 'IJq0yyWug1k')">
-                <span>▶️ तुम ही हो</span> <span class="year-tag">2013</span>
-            </button>
-
-            <button class="song-btn" onclick="playSong('गलियां (एक व्हिलन)', 'FxAG_12PkyU')">
-                <span>▶️ गलियां</span> <span class="year-tag">2014</span>
+            <button class="song-btn" onclick="playAudio('तुम ही हो (2013)', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3')">
+                <span>▶️ ५. तुम ही हो</span> <span class="year-tag">2013</span>
             </button>
         </div>
     </div>
 
     <script>
-        function playSong(title, videoId) {
-            var player = document.getElementById('youtubePlayer');
-            var songTitle = document.getElementById('song-title');
+        function playAudio(title, url) {
+            var player = document.getElementById('audioPlayer');
+            var titleDisplay = document.getElementById('song-title');
             
-            // यूट्यूब एम्बेड युआरएल अपडेट करा आणि ऑटो-प्ले सुरू करा
-            player.src = "https://www.youtube.com/embed/" + videoId + "?autoplay=1";
-            songTitle.innerText = "▶️ सध्या चालू आहे: " + title;
+            player.src = url;
+            titleDisplay.innerText = "▶️ सध्या चालू आहे: " + title;
+            player.play();
         }
     </script>
 
