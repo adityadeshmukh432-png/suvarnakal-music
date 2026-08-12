@@ -5,18 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>सुवर्णकाळ (२०००-२०१२) 🎶</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #121212; color: #fff; margin: 0; padding: 0; }
-        .header { background-color: #d84315; padding: 15px; font-size: 1.5rem; font-weight: bold; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
-        .player-container { padding: 15px; background: #1e1e1e; border-bottom: 2px solid #333; position: sticky; top: 0; z-index: 99; text-align: center; }
+        /* कोकणातील बॅकग्राउंड इमेज आणि डार्क इफेक्ट */
+        body { 
+            font-family: 'Segoe UI', Tahoma, sans-serif; 
+            background: linear-gradient(rgba(18, 18, 18, 0.85), rgba(18, 18, 18, 0.85)), url('https://images.unsplash.com/photo-1596423735880-5f2a689b903e?q=80&w=1080&auto=format&fit=crop') no-repeat center center fixed; 
+            background-size: cover; 
+            color: #fff; 
+            margin: 0; 
+            padding: 0; 
+        }
+        .header { background-color: rgba(216, 67, 21, 0.9); padding: 15px; font-size: 1.5rem; font-weight: bold; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+        .player-container { padding: 15px; background: rgba(30, 30, 30, 0.9); border-bottom: 2px solid #ffab40; position: sticky; top: 0; z-index: 99; text-align: center; backdrop-filter: blur(5px); }
         iframe { width: 100%; max-width: 500px; height: 230px; border-radius: 10px; border: 2px solid #ffab40; background: #000; }
-        .playlist-title { padding: 15px 15px 5px 15px; font-size: 1.2rem; font-weight: bold; color: #ffab40; }
-        .playlist { padding: 0 15px 50px 15px; max-width: 500px; margin: 0 auto; }
-        .song-item { background: #2c2c2c; margin-bottom: 10px; padding: 12px 15px; border-radius: 8px; cursor: pointer; border-left: 5px solid transparent; display: flex; justify-content: space-between; align-items: center; transition: 0.2s; }
-        .song-item:active { background: #3d3d3d; }
+        .playlist-title { padding: 15px 15px 5px 15px; font-size: 1.2rem; font-weight: bold; color: #ffab40; text-shadow: 1px 1px 2px black; }
+        .playlist { padding: 0 15px 20px 15px; max-width: 500px; margin: 0 auto; }
+        .song-item { background: rgba(44, 44, 44, 0.7); margin-bottom: 10px; padding: 12px 15px; border-radius: 8px; cursor: pointer; border-left: 5px solid transparent; display: flex; justify-content: space-between; align-items: center; transition: 0.2s; backdrop-filter: blur(2px); }
+        .song-item:active { background: rgba(61, 61, 61, 0.9); }
         .song-item.active { background: #ffab40; color: #121212; font-weight: bold; border-left: 5px solid #fff; }
-        .song-number { opacity: 0.8; margin-right: 10px; font-size: 0.9rem; }
+        .song-number { opacity: 0.9; margin-right: 10px; font-size: 0.9rem; }
         .song-title { flex-grow: 1; font-size: 1.05rem; }
         .play-icon { font-size: 1.2rem; }
+        
+        /* आदित्य देशमुख यांच्या नावाचा खोका (Footer) */
+        .creator-box {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #ffab40;
+            text-align: center;
+            padding: 15px;
+            margin: 20px auto 40px auto;
+            max-width: 470px;
+            border-radius: 10px;
+            border: 2px dashed #ffab40;
+            font-size: 1.1rem;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+        }
     </style>
 </head>
 <body>
@@ -32,8 +55,12 @@
         <!-- JavaScript ५० गाणी इथे जोडेल -->
     </div>
 
+    <!-- क्रेडिट बॉक्स -->
+    <div class="creator-box">
+        👨‍💻 ही वेबसाईट <b>आदित्य देशमुख</b> यांनी तयार केली आहे.
+    </div>
+
     <script>
-        // ५० हिट मराठी गाण्यांची यादी
         const songs = [
             { title: "राधा ही बावरी", id: "4O2i_Yq3W7M" },
             { title: "अप्सरा आली", id: "5HlRmuH2sWk" },
@@ -113,5 +140,4 @@
         });
     </script>
 </body>
-            </html>
-            
+</html>
