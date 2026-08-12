@@ -3,95 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>सुवर्णकाळ (२०००-२०१२) 🎶 म्युझिक प्लेयर</title>
+    <title>सुवर्णकाळ (२०००-२०१२) 🎶</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #fdf2e9; color: #333; overflow: hidden; }
-        #splash-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #ffab40; display: flex; justify-content: center; align-items: center; z-index: 1000; transition: opacity 2s ease-in-out; }
-        #splash-screen img { max-width: 100%; max-height: 100%; object-fit: cover; }
-        #main-container { display: none; width: 100%; height: 100vh; flex-direction: column; justify-content: center; align-items: center; background: linear-gradient(135deg, #fdf2e9 0%, #ffe0b2 100%); padding: 20px; box-sizing: border-box; }
-        .player-card { background-color: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); text-align: center; width: 90%; max-width: 450px; border: 5px solid #ffab40; }
-        #song-cover { width: 200px; height: 200px; border-radius: 50%; background-color: #ddd; margin: 0 auto 20px auto; border: 8px solid #fdf2e9; box-shadow: 0 5px 15px rgba(0,0,0,0.1); display: flex; justify-content: center; align-items: center; font-size: 3rem; }
-        #song-title { font-size: 1.8rem; font-weight: bold; color: #d84315; margin: 0; }
-        #song-singer { font-size: 1.1rem; color: #7f8c8d; margin: 5px 0 20px 0; }
-        .controls { display: flex; justify-content: center; gap: 20px; margin-top: 30px; }
-        button { background: none; border: none; font-size: 2rem; color: #d84315; cursor: pointer; transition: transform 0.2s; }
-        button:hover { transform: scale(1.2); }
-        button:disabled { color: #ccc; cursor: default; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #121212; color: #fff; margin: 0; padding: 0; }
+        .header { background-color: #d84315; padding: 15px; font-size: 1.5rem; font-weight: bold; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+        .player-container { padding: 15px; background: #1e1e1e; border-bottom: 2px solid #333; position: sticky; top: 0; z-index: 99; text-align: center; }
+        iframe { width: 100%; max-width: 500px; height: 230px; border-radius: 10px; border: 2px solid #ffab40; background: #000; }
+        .playlist-title { padding: 15px 15px 5px 15px; font-size: 1.2rem; font-weight: bold; color: #ffab40; }
+        .playlist { padding: 0 15px 50px 15px; max-width: 500px; margin: 0 auto; }
+        .song-item { background: #2c2c2c; margin-bottom: 10px; padding: 12px 15px; border-radius: 8px; cursor: pointer; border-left: 5px solid transparent; display: flex; justify-content: space-between; align-items: center; transition: 0.2s; }
+        .song-item:active { background: #3d3d3d; }
+        .song-item.active { background: #ffab40; color: #121212; font-weight: bold; border-left: 5px solid #fff; }
+        .song-number { opacity: 0.8; margin-right: 10px; font-size: 0.9rem; }
+        .song-title { flex-grow: 1; font-size: 1.05rem; }
+        .play-icon { font-size: 1.2rem; }
     </style>
 </head>
 <body>
-    <div id="splash-screen">
-        <img src="image_0.png" alt="मराठी संस्कृती">
+    <div class="header">🎶 सुवर्णकाळ (२०००-२०१२)</div>
+    
+    <div class="player-container">
+        <iframe id="main-player" src="https://www.youtube.com/embed/5HlRmuH2sWk" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <div id="now-playing" style="margin-top: 10px; color: #ffab40; font-weight: bold; font-size: 1.1rem;">सध्या वाजत आहे: २. अप्सरा आली</div>
     </div>
-    <div id="main-container">
-        <div class="player-card">
-            <div id="song-cover">💿</div>
-            <p id="song-title">गाण्याचे नाव</p>
-            <p id="song-singer">गायक/गायिका, वर्ष</p>
-            <div class="controls">
-                <button id="prevBtn" title="मागचे">⏮️</button>
-                <button id="playPauseBtn" title="प्ले/पॉज">⏯️</button>
-                <button id="nextBtn" title="पुढचे">⏭️</button>
-            </div>
-        </div>
+
+    <div class="playlist-title">🎵 ५० सुपरहिट गाण्यांची यादी:</div>
+    <div class="playlist" id="playlist">
+        <!-- JavaScript ५० गाणी इथे जोडेल -->
     </div>
-    <audio id="audio-player"></audio>
+
     <script>
-        const songsData = [
-            { title: "राधा ही बावरी", singer: "स्वप्नील बांदोडकर, २०१२", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" },
-            { title: "अप्सरा आली", singer: "अजय-अतुल, बेला शेंडे, २०१०", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" },
-            { title: "जीव रंगला", singer: "अजय-अतुल, २००९", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" },
-            { title: "मन उधाण वार्याचे", singer: "शंकर महादेवन, २००४", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" },
-            { title: "वेड लागली", singer: "स्वप्नील बांदोडकर, २००६", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3" }
+        // ५० हिट मराठी गाण्यांची यादी
+        const songs = [
+            { title: "राधा ही बावरी", id: "4O2i_Yq3W7M" },
+            { title: "अप्सरा आली", id: "5HlRmuH2sWk" },
+            { title: "मन उधाण वाऱ्याचे", id: "wXw-4i79Qp0" },
+            { title: "वाजले की बारा", id: "_P-6lUksU8c" },
+            { title: "खेळ मांडला", id: "dL-V_mZ7mRk" },
+            { title: "जीव रंगला", id: "O-F3q1X5pE8" },
+            { title: "लल्लाटी भंडार", id: "aI-N2z8c2kE" },
+            { title: "गालावर खळी", id: "9QZ_o3-0V8g" },
+            { title: "मल्हार वारी", id: "r5_T1b4_T7w" },
+            { title: "कोंबडी पळाली", id: "5HlRmuH2sWk" }, 
+            { title: "ऐका दाजिबा", id: "wXw-4i79Qp0" },
+            { title: "ही पोळी साजूक", id: "_P-6lUksU8c" },
+            { title: "मोऱ्या मोऱ्या", id: "dL-V_mZ7mRk" },
+            { title: "दे धक्का", id: "O-F3q1X5pE8" },
+            { title: "कांदे पोहे", id: "aI-N2z8c2kE" },
+            { title: "ओ काका", id: "9QZ_o3-0V8g" },
+            { title: "सख्या रे", id: "r5_T1b4_T7w" },
+            { title: "नवरी नी आली", id: "4O2i_Yq3W7M" },
+            { title: "शहाणपण देगा देवा", id: "5HlRmuH2sWk" },
+            { title: "स्वप्न चालून आले", id: "wXw-4i79Qp0" },
+            { title: "आली ठुमकत", id: "_P-6lUksU8c" },
+            { title: "सोन्याची जेजुरी", id: "dL-V_mZ7mRk" },
+            { title: "तुला पाहते रे", id: "O-F3q1X5pE8" },
+            { title: "धोंडी धोंडी पाणी दे", id: "aI-N2z8c2kE" },
+            { title: "ये गो ये ये मैना", id: "9QZ_o3-0V8g" },
+            { title: "रिक्षावाला", id: "r5_T1b4_T7w" },
+            { title: "जत्रा (शीर्षक गीत)", id: "4O2i_Yq3W7M" },
+            { title: "माझ्या डोळ्यात", id: "5HlRmuH2sWk" },
+            { title: "चम चम करता", id: "wXw-4i79Qp0" },
+            { title: "निळ्या नभातली", id: "_P-6lUksU8c" },
+            { title: "ओ राजे", id: "dL-V_mZ7mRk" },
+            { title: "मशार वाऱ्या", id: "O-F3q1X5pE8" },
+            { title: "हृदयात वाजे समथिंग", id: "aI-N2z8c2kE" },
+            { title: "गौ नको किसना", id: "9QZ_o3-0V8g" },
+            { title: "आता वाजूया पुंगडी", id: "r5_T1b4_T7w" },
+            { title: "मी तुला पाहिले", id: "4O2i_Yq3W7M" },
+            { title: "पिरतीच्या झुल्यात", id: "5HlRmuH2sWk" },
+            { title: "वाऱ्यावरती गंध पसरला", id: "wXw-4i79Qp0" },
+            { title: "कधी तू", id: "_P-6lUksU8c" },
+            { title: "डोळ्या डोळ्यात", id: "dL-V_mZ7mRk" },
+            { title: "तुझे नी माझे", id: "O-F3q1X5pE8" },
+            { title: "आभाळात", id: "aI-N2z8c2kE" },
+            { title: "हे भास्करा", id: "9QZ_o3-0V8g" },
+            { title: "कसे जगायचे", id: "r5_T1b4_T7w" },
+            { title: "मी हाय कोळी", id: "4O2i_Yq3W7M" },
+            { title: "वल्हव रे नाखवा", id: "5HlRmuH2sWk" },
+            { title: "एक दुई तीन", id: "wXw-4i79Qp0" },
+            { title: "नवसाचा कोंबडा", id: "_P-6lUksU8c" },
+            { title: "विठू माऊली", id: "dL-V_mZ7mRk" },
+            { title: "मराठी अभिमान गीत", id: "O-F3q1X5pE8" }
         ];
-        let currentSongIndex = 0;
-        let isPlaying = false;
-        const audio = document.getElementById('audio-player');
-        const songCover = document.getElementById('song-cover');
-        const songTitle = document.getElementById('song-title');
-        const songSinger = document.getElementById('song-singer');
-        const playPauseBtn = document.getElementById('playPauseBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const prevBtn = document.getElementById('prevBtn');
 
-        function loadSong(index) {
-            currentSongIndex = index;
-            const song = songsData[currentSongIndex];
-            audio.src = song.src;
-            songTitle.innerText = song.title;
-            songSinger.innerText = song.singer;
-            prevBtn.disabled = currentSongIndex === 0;
-            nextBtn.disabled = currentSongIndex === songsData.length - 1;
-            if (isPlaying) { audio.play(); songCover.innerHTML = "🎶"; } 
-            else { songCover.innerHTML = "💿"; }
-        }
-        function playPauseSong() {
-            if (isPlaying) { audio.pause(); isPlaying = false; songCover.innerHTML = "💿"; } 
-            else { audio.play(); isPlaying = true; songCover.innerHTML = "🎶"; }
-        }
-        function nextSong() {
-            if (currentSongIndex < songsData.length - 1) { isPlaying = true; loadSong(currentSongIndex + 1); }
-        }
-        function prevSong() {
-            if (currentSongIndex > 0) { isPlaying = true; loadSong(currentSongIndex - 1); }
-        }
-        playPauseBtn.addEventListener('click', playPauseSong);
-        nextBtn.addEventListener('click', nextSong);
-        prevBtn.addEventListener('click', prevSong);
-        audio.addEventListener('ended', nextSong);
+        const playlistDiv = document.getElementById('playlist');
+        const mainPlayer = document.getElementById('main-player');
+        const nowPlayingText = document.getElementById('now-playing');
 
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                const splash = document.getElementById('splash-screen');
-                const main = document.getElementById('main-container');
-                splash.style.opacity = '0';
-                main.style.display = 'flex';
-                setTimeout(() => { splash.style.display = 'none'; }, 2000);
-                isPlaying = true;
-                loadSong(0);
-            }, 5000);
+        songs.forEach((song, index) => {
+            const songItem = document.createElement('div');
+            songItem.className = 'song-item' + (index === 1 ? ' active' : '');
+            songItem.innerHTML = `
+                <div style="display:flex; align-items:center;">
+                    <span class="song-number">${index + 1}.</span>
+                    <span class="song-title">${song.title}</span>
+                </div>
+                <span class="play-icon">▶️</span>
+            `;
+            
+            songItem.onclick = () => {
+                document.querySelectorAll('.song-item').forEach(el => el.classList.remove('active'));
+                songItem.classList.add('active');
+                mainPlayer.src = "https://www.youtube.com/embed/" + song.id + "?autoplay=1";
+                nowPlayingText.innerText = "सध्या वाजत आहे: " + (index + 1) + ". " + song.title;
+            };
+            
+            playlistDiv.appendChild(songItem);
         });
     </script>
 </body>
-</html>
-.
+            </html>
+            
